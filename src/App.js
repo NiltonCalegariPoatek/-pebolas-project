@@ -17,8 +17,9 @@ const Score = ({ teamName, teamColor, points, addPoint, removePoint, handleTeamN
       <Names teamName={teamName} teamColor={teamColor} handleTeamNameChange={handleTeamNameChange}/>
       <p className='number'> {points} </p>
       <div className='button-container'>
-      <button className='button' onClick={addPoint}>+</button>
       <button className='button' onClick={removePoint}>-</button>
+      <button className='button' onClick={addPoint}>+</button>
+
       </div>
     </div>
   )
@@ -27,7 +28,7 @@ const Score = ({ teamName, teamColor, points, addPoint, removePoint, handleTeamN
 const Clock = () => {
 
   const [time, setTime] = useState(0);
-  const [running, setRunning] = useState(true);
+  const [running] = useState(true);
 
   useEffect(() => {
     let interval;
@@ -45,9 +46,18 @@ const Clock = () => {
       <span className='clock'>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
       <span className='clock'>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
     </div>
-
   )
+}
 
+function PopUp(props) {
+  return (props.trigger) ? (
+    <div className='popup'>
+      <div className= 'popup-content'>
+        <button className='close-button' onClick={() => props.setTrigger(false)}>X</button>
+        {props.children}
+      </div>
+    </div>
+  ) : "";
 }
 
 function App() {
@@ -57,6 +67,8 @@ function App() {
 
   const [teamNameGreen, setTeamNameGreen] = useState()
   const [teamNameYellow, setTeamNameYellow] = useState()
+
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   function handleAddGoal(teamColor) {
     //Verification > 10
@@ -125,10 +137,12 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
+
         <fieldset className='logo'>
           <img src={logo} alt='logo'></img>
-          <a className='rules' href="https://modobrincar.rihappy.com.br/jogar-pebolim/">Rules</a>
+          <button className='rules' onClick={() => setButtonPopup(true)}>Rules</button>
         </fieldset>
+
       </header>
       <Clock />
       <div className='scores-container'>
@@ -151,6 +165,15 @@ function App() {
         />
       </div>
       <p>Team name green: {teamNameGreen} Team name yellow: {teamNameYellow}</p>
+
+      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
+        <h3 className='rules-title'>Rules</h3>
+        <ul>
+          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+          <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+        </ul>
+      </PopUp>
     </div>
   );
 }
