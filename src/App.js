@@ -3,33 +3,34 @@ import logo from './images/logo.png'
 import React, { useState, useEffect } from 'react';
 
 //Pebolas project
-const Names = ({ teamColor, teamName, handleTeamNameChange }) => {
-  return (
+const Names = ({ teamColor, teamName, handleTeamNameChange, gameStart }) => {
+  return ((gameStart == true) ? (
+    <>
+<p>{teamName}</p>
+    </>
+  ) :
     <form className='names'>
       <input className='names-input' type={"text"} Placeholder="Team Name: 🖉" value={teamName} onChange={(e) => handleTeamNameChange(teamColor, e.target.value)} />
     </form>
   )
 }
 
-const Score = ({ teamName, teamColor, points, addPoint, removePoint, handleTeamNameChange }) => {
+const Score = ({ teamName, teamColor, points, addPoint, removePoint, handleTeamNameChange, gameStart}) => {
   return (
     <div className='score'>
-      <Names teamName={teamName} teamColor={teamColor} handleTeamNameChange={handleTeamNameChange}/>
+      <Names teamName={teamName} teamColor={teamColor} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart}/>
       <p className='number'> {points} </p>
       <div className='button-container'>
-      <button className='button' onClick={removePoint}>-</button>
-      <button className='button' onClick={addPoint}>+</button>
+        <button className='button' onClick={removePoint}>-</button>
+        <button className='button' onClick={addPoint}>+</button>
 
       </div>
     </div>
   )
 }
 
-const Clock = () => {
-
+const Clock = ({ running }) => {
   const [time, setTime] = useState(0);
-  const [running] = useState(true);
-
   useEffect(() => {
     let interval;
     if (running) {
@@ -52,12 +53,28 @@ const Clock = () => {
 function PopUp(props) {
   return (props.trigger) ? (
     <div className='popup'>
-      <div className= 'popup-content'>
+      <div className='popup-content'>
         <button className='close-button' onClick={() => props.setTrigger(false)}>X</button>
         {props.children}
       </div>
     </div>
   ) : "";
+}
+
+const StartButton = ({ gameStart, setGameStart }) => {
+  return (
+    <div>
+      <button className="start-button" onClick={() => setGameStart(true)}>Start</button>
+    </div>
+  )
+}
+
+const StopButton = ({ gameStart, setGameStart }) => {
+  return (
+    <div>
+      <button className="stop-button" onClick={() => setGameStart(false)}>Finish</button>
+    </div>
+  )
 }
 
 function App() {
@@ -70,12 +87,18 @@ function App() {
 
   const [buttonPopup, setButtonPopup] = useState(false);
 
+  const [gameStart, setGameStart] = useState(false)
+
+
+  const [running, setRunning] = useState(false);
+
+  useEffect(() => { handleGameStart({ gameStart }) }, [gameStart])
+
   function handleAddGoal(teamColor) {
     //Verification > 10
     switch (teamColor.toLowerCase()) {
       case "green":
         if (pointsGreen >= 10) {
-          alert('Score is already 10!')
           return
         }
 
@@ -84,7 +107,6 @@ function App() {
 
       case "yellow":
         if (pointsYellow >= 10) {
-          alert('Score is already 10!')
           return
         }
         setPointsYellow(pointsYellow + 1)
@@ -100,7 +122,6 @@ function App() {
     switch (teamColor.toLowerCase()) {
       case "green":
         if (pointsGreen <= 0) {
-          alert('Score is already 0!')
           return
         }
 
@@ -109,7 +130,6 @@ function App() {
 
       case "yellow":
         if (pointsYellow <= 0) {
-          alert('Score is already 0!')
           return
         }
         setPointsYellow(pointsYellow - 1)
@@ -134,6 +154,25 @@ function App() {
     }
   }
 
+  function StartFinishButton({ gameStart }) {
+    return (gameStart == true) ? (
+      <>
+        <StopButton setGameStart={setGameStart} />
+      </>
+    ) : <StartButton setGameStart={setGameStart} />;
+  }
+
+
+
+  function handleGameStart({ gameStart }) {
+    if (gameStart) {
+      setRunning(true)
+    }
+    else {
+      setRunning(false)
+    }
+  }
+
   return (
     <div className='App'>
       <header className='App-header'>
@@ -144,7 +183,7 @@ function App() {
         </fieldset>
 
       </header>
-      <Clock />
+      <Clock running={running} />
       <div className='scores-container'>
         <Score
           points={pointsGreen}
@@ -152,7 +191,8 @@ function App() {
           removePoint={() => handleRemoveGoal("green")}
           teamName={teamNameGreen}
           handleTeamNameChange={handleTeamNameChange}
-          teamColor = {"green"}
+          teamColor={"green"}
+          gameStart={gameStart}
         />
 
         <Score
@@ -161,10 +201,13 @@ function App() {
           removePoint={() => handleRemoveGoal("yellow")}
           teamName={teamNameYellow}
           handleTeamNameChange={handleTeamNameChange}
-          teamColor = {"yellow"}
+          teamColor={"yellow"}
+          gameStart={gameStart}
         />
       </div>
-      <p>Team name green: {teamNameGreen} Team name yellow: {teamNameYellow}</p>
+
+      <StartFinishButton gameStart={gameStart} />
+
 
       <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
         <h3 className='rules-title'>Rules</h3>
@@ -177,7 +220,5 @@ function App() {
     </div>
   );
 }
-
-
 
 export default App;
