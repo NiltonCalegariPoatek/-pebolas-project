@@ -41,9 +41,9 @@
 .score {
   font-size: 40px;
   padding: 20px;
-  margin-right: 120px;
-  margin-left: 120px;
-  margin-top: 60px;
+  margin-right: 180px;
+  margin-left: 180px;
+  margin-top: 40px;
   width: 60%;
   height: 500px;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -73,25 +73,21 @@
 .number {
   height:20%;
   width:100%;
-  margin-bottom: 150px;
-  font-size: 120px;
+  margin-top:90px;
+  margin-bottom: 160px;
+  font-size: 160px;
   border-bottom: 0px;
   font-weight: bold;
 }
 
-.names {
-color:black;
-}
 
 .names-input {
-  width: 19vw;
+  width: 90%;
   height: 5vh;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
   border: none;
   font-size: x-large;
   border-radius: 10px;
-  margin-right: 145px;
-  margin-left: 145px;
 }
 
 .clock-container {
@@ -139,25 +135,34 @@ color:black;
 }
 
 .start-button{
-  height: 50px;
-  width: 100px;
+  height: 60px;
+  width: 130px;
   border-radius: 10px;
   background-color:#6FCF97;
   border: none;
   font-weight: bold;
   font-size: large;
+  margin-top: 20px;
 }
 
 .stop-button{
-  height: 50px;
-  width: 100px;
+  height: 60px;
+  width: 130px;
   border-radius: 10px;
   background-color: #FF7870;
   border: none;
   font-weight: bold;
   font-size: large;
+  margin-top: 20px;
 }
 
 .team-names {
   font-size: xx-large;
+  margin:0;
+}
+
+.winner{
+  font-size: x-large;
+  margin:0;
+  margin-bottom: 10px;
 }

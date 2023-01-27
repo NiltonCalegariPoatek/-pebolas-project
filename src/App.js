@@ -1,70 +1,12 @@
 import './App.css';
 import logo from './images/logo.png'
 import React, { useState, useEffect } from 'react';
-import Score from './Components/Score.';
-
+import Score from './Components/Score';
+import Names from './Components/Names';
+import Clock from './Components/Clock';
+import PopUp from './Components/PopUp';
+import StartStopButton from './Components/StartStopButton';
 //Pebolas project
-const Names = ({ teamColor, teamName, handleTeamNameChange, gameStart }) => {
-  return ((gameStart === true) ? (
-    <>
-      <p className='team-names'>{teamName ? teamName : teamColor}</p>
-    </>
-  ) :
-    <form className='names'>
-      <input className='names-input' type={"text"} Placeholder="Team Name: 🖉" value={teamName} onChange={(e) => handleTeamNameChange(teamColor, e.target.value)} />
-    </form>
-  )
-}
-
-
-const Clock = ({ running, winner }) => {
-  const [time, setTime] = useState(0);
-  useEffect(() => {
-    let interval;
-    if (running) {
-      interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 10);
-      }, 10);
-    } else if (!running) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [running]);
-  return (
-    <div className='clock-container'>
-      <p>{winner ? `${winner} is the winner` : ""}</p>
-      <span className='clock'>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-      <span className='clock'>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
-    </div>
-  )
-}
-
-function PopUp(props) {
-  return (props.trigger) ? (
-    <div className='popup'>
-      <div className='popup-content'>
-        <button className='close-button' onClick={() => props.setTrigger(false)}>X</button>
-        {props.children}
-      </div>
-    </div>
-  ) : "";
-}
-
-const StartButton = ({ setGameStart }) => {
-  return (
-    <div>
-      <button className="start-button" onClick={() => setGameStart(true)}>Start</button>
-    </div>
-  )
-}
-
-const StopButton = ({ setGameStart }) => {
-  return (
-    <div>
-      <button className="stop-button" onClick={() => setGameStart(false)}>Finish</button>
-    </div>
-  )
-}
 
 function App() {
 
@@ -144,14 +86,6 @@ function App() {
     }
   }
 
-  function StartFinishButton({ gameStart }) {
-    return (gameStart === true) ? (
-      <>
-        <StopButton setGameStart={setGameStart} />
-      </>
-    ) : <StartButton setGameStart={setGameStart} />;
-  }
-
   function handleGameStart({ gameStart }) {
     if (gameStart) {
       setRunning(true)
@@ -193,30 +127,26 @@ function App() {
             addPoint={() => handleAddGoal("green")}
             removePoint={() => handleRemoveGoal("green")}
             winner={winner}
+            gameStart={gameStart}
           />
         </div>
         
-        <div>
+        <div className='scores-container'>
           <Names teamName={teamNameYellow} teamColor={"yellow"} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart} />
           <Score
             points={pointsYellow}
             addPoint={() => handleAddGoal("yellow")}
             removePoint={() => handleRemoveGoal("yellow")}
             winner={winner}
+            gameStart={gameStart}
           />
         </div>
       </div>
 
-      <StartFinishButton gameStart={gameStart} />
+      <StartStopButton setGameStart={setGameStart} gameStart={gameStart} />
 
-      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
-        <h3 className='rules-title'>Rules</h3>
-        <ul>
-          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-          <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-          <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
-        </ul>
-      </PopUp>
+      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}/>
+
     </div>
   );
 }
