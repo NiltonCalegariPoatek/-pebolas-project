@@ -27,10 +27,15 @@
   border: none;
 }
 
+.scores-super-container {
+  display: flex;
+  justify-content: center; 
+}
+
 .scores-container {
   display: flex;
-  justify-content: center;
- 
+  flex-direction: column;
+  align-items: center;
 }
 
 .score {
@@ -39,7 +44,7 @@
   margin-right: 120px;
   margin-left: 120px;
   margin-top: 60px;
-  width: 20%;
+  width: 60%;
   height: 500px;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
@@ -68,20 +73,25 @@
 .number {
   height:20%;
   width:100%;
-  padding-bottom: 0px;
-  font-size: 90px;
+  margin-bottom: 150px;
+  font-size: 120px;
+  border-bottom: 0px;
+  font-weight: bold;
 }
 
 .names {
 color:black;
-display: inline-flex
 }
 
 .names-input {
-  width: 15vw;
-  height: 3vh;
+  width: 19vw;
+  height: 5vh;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
   border: none;
+  font-size: x-large;
+  border-radius: 10px;
+  margin-right: 145px;
+  margin-left: 145px;
 }
 
 .clock-container {
@@ -146,4 +156,8 @@ display: inline-flex
   border: none;
   font-weight: bold;
   font-size: large;
+}
+
+.team-names {
+  font-size: xx-large;
 }

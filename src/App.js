@@ -1,12 +1,13 @@
 import './App.css';
 import logo from './images/logo.png'
 import React, { useState, useEffect } from 'react';
+import Score from './Components/Score.';
 
 //Pebolas project
 const Names = ({ teamColor, teamName, handleTeamNameChange, gameStart }) => {
-  return ((gameStart == true) ? (
+  return ((gameStart === true) ? (
     <>
-<p>{teamName}</p>
+      <p className='team-names'>{teamName ? teamName : teamColor}</p>
     </>
   ) :
     <form className='names'>
@@ -15,21 +16,8 @@ const Names = ({ teamColor, teamName, handleTeamNameChange, gameStart }) => {
   )
 }
 
-const Score = ({ teamName, teamColor, points, addPoint, removePoint, handleTeamNameChange, gameStart}) => {
-  return (
-    <div className='score'>
-      <Names teamName={teamName} teamColor={teamColor} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart}/>
-      <p className='number'> {points} </p>
-      <div className='button-container'>
-        <button className='button' onClick={removePoint}>-</button>
-        <button className='button' onClick={addPoint}>+</button>
 
-      </div>
-    </div>
-  )
-}
-
-const Clock = ({ running }) => {
+const Clock = ({ running, winner }) => {
   const [time, setTime] = useState(0);
   useEffect(() => {
     let interval;
@@ -44,6 +32,7 @@ const Clock = ({ running }) => {
   }, [running]);
   return (
     <div className='clock-container'>
+      <p>{winner ? `${winner} is the winner` : ""}</p>
       <span className='clock'>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
       <span className='clock'>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
     </div>
@@ -61,7 +50,7 @@ function PopUp(props) {
   ) : "";
 }
 
-const StartButton = ({ gameStart, setGameStart }) => {
+const StartButton = ({ setGameStart }) => {
   return (
     <div>
       <button className="start-button" onClick={() => setGameStart(true)}>Start</button>
@@ -69,7 +58,7 @@ const StartButton = ({ gameStart, setGameStart }) => {
   )
 }
 
-const StopButton = ({ gameStart, setGameStart }) => {
+const StopButton = ({ setGameStart }) => {
   return (
     <div>
       <button className="stop-button" onClick={() => setGameStart(false)}>Finish</button>
@@ -89,26 +78,27 @@ function App() {
 
   const [gameStart, setGameStart] = useState(false)
 
-
   const [running, setRunning] = useState(false);
 
+  const [winner, setWinner] = useState()
+
+
   useEffect(() => { handleGameStart({ gameStart }) }, [gameStart])
+
+  useEffect(() => {
+    if (winner === undefined) {
+      handleWinGame(pointsGreen, pointsYellow)
+    }
+  })
 
   function handleAddGoal(teamColor) {
     //Verification > 10
     switch (teamColor.toLowerCase()) {
       case "green":
-        if (pointsGreen >= 10) {
-          return
-        }
-
         setPointsGreen(pointsGreen + 1)
         break;
 
       case "yellow":
-        if (pointsYellow >= 10) {
-          return
-        }
         setPointsYellow(pointsYellow + 1)
         break;
 
@@ -155,14 +145,12 @@ function App() {
   }
 
   function StartFinishButton({ gameStart }) {
-    return (gameStart == true) ? (
+    return (gameStart === true) ? (
       <>
         <StopButton setGameStart={setGameStart} />
       </>
     ) : <StartButton setGameStart={setGameStart} />;
   }
-
-
 
   function handleGameStart({ gameStart }) {
     if (gameStart) {
@@ -170,6 +158,17 @@ function App() {
     }
     else {
       setRunning(false)
+    }
+  }
+
+  function handleWinGame(pointsGreen, pointsYellow) {
+    if (pointsGreen >= pointsYellow + 2 && pointsGreen >= 10) {
+      setWinner("green")
+      console.log("Verde ganhou")
+    }
+    else if (pointsYellow >= pointsGreen + 2 && pointsYellow >= 10) {
+      setWinner("yellow")
+      console.log("Amarelo ganhou")
     }
   }
 
@@ -183,31 +182,32 @@ function App() {
         </fieldset>
 
       </header>
-      <Clock running={running} />
-      <div className='scores-container'>
-        <Score
-          points={pointsGreen}
-          addPoint={() => handleAddGoal("green")}
-          removePoint={() => handleRemoveGoal("green")}
-          teamName={teamNameGreen}
-          handleTeamNameChange={handleTeamNameChange}
-          teamColor={"green"}
-          gameStart={gameStart}
-        />
+      <Clock running={running} winner={winner} />
 
-        <Score
-          points={pointsYellow}
-          addPoint={() => handleAddGoal("yellow")}
-          removePoint={() => handleRemoveGoal("yellow")}
-          teamName={teamNameYellow}
-          handleTeamNameChange={handleTeamNameChange}
-          teamColor={"yellow"}
-          gameStart={gameStart}
-        />
+
+      <div className='scores-super-container'>
+        <div className='scores-container'>
+          <Names teamName={teamNameGreen} teamColor={"green"} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart} />
+          <Score
+            points={pointsGreen}
+            addPoint={() => handleAddGoal("green")}
+            removePoint={() => handleRemoveGoal("green")}
+            winner={winner}
+          />
+        </div>
+        
+        <div>
+          <Names teamName={teamNameYellow} teamColor={"yellow"} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart} />
+          <Score
+            points={pointsYellow}
+            addPoint={() => handleAddGoal("yellow")}
+            removePoint={() => handleRemoveGoal("yellow")}
+            winner={winner}
+          />
+        </div>
       </div>
 
       <StartFinishButton gameStart={gameStart} />
-
 
       <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}>
         <h3 className='rules-title'>Rules</h3>
