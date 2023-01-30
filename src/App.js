@@ -1,4 +1,4 @@
-import './App.css';
+import './Dark-app.css';
 import logo from './images/logo.png'
 import React, { useState, useEffect } from 'react';
 import Score from './Components/Score';
@@ -6,6 +6,7 @@ import Names from './Components/Names';
 import Clock from './Components/Clock';
 import PopUp from './Components/PopUp';
 import StartStopButton from './Components/StartStopButton';
+import FinishPopUp from './Components/FinishPopUp';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
   const [teamNameYellow, setTeamNameYellow] = useState()
 
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [buttonFinishPopup, setButtonFinishPopup] = useState(false);
 
   const [gameStart, setGameStart] = useState(false)
 
@@ -86,12 +88,30 @@ function App() {
   }
 
   function handleGameStart({ gameStart }) {
+    setGameStart(true) 
+    console.log(gameStart)
     if (gameStart) {
       setRunning(true)
     }
     else {
       setRunning(false)
     }
+  }
+
+  function handleFinishGame(pointsGreen, pointsYellow, gameStart) {
+    setGameStart(false)
+    console.log(gameStart)
+    if (pointsGreen > pointsYellow) {
+      setWinner("green")
+      setButtonFinishPopup(true)
+      console.log(gameStart)
+    }
+    else if (pointsYellow > pointsGreen) {
+      setWinner("yellow")
+      setButtonFinishPopup(true)
+      console.log(gameStart)
+    }
+    console.log(gameStart)
   }
 
   function handleWinGame(pointsGreen, pointsYellow) {
@@ -104,6 +124,8 @@ function App() {
       console.log("Amarelo ganhou")
     }
   }
+
+
 
   return (
     <div className='App'>
@@ -129,7 +151,7 @@ function App() {
             gameStart={gameStart}
           />
         </div>
-        
+
         <div className='scores-container'>
           <Names teamName={teamNameYellow} teamColor={"yellow"} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart} />
           <Score
@@ -142,9 +164,10 @@ function App() {
         </div>
       </div>
 
-      <StartStopButton setGameStart={setGameStart} gameStart={gameStart} />
+      <StartStopButton setGameStart={setGameStart} gameStart={gameStart} handleFinishGame={handleFinishGame} handleGameStart={handleGameStart}/>
 
-      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}/>
+      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup} />
+      <FinishPopUp trigger={buttonFinishPopup} setTrigger={setButtonFinishPopup}/>
 
     </div>
   );

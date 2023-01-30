@@ -1,0 +1,180 @@
+body{
+    background-color: rgb(36, 36, 36);
+}
+
+.App {
+    text-align: center;
+    color: white;
+    background-color: rgb(36, 36, 36);
+  }
+  
+  .App-header {
+    font-size: calc(10px + 2vmin);
+    
+  }
+  
+  .logo {
+    display: flex;
+    block-size: 60px;
+    border:none;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
+    background-color: rgb(20, 20, 20);
+  }
+  
+  .rules {
+    float: right;
+    padding: 20px; 
+    margin: 10px;
+    font-size:20px;
+    position:absolute;
+    right: 0;
+    top: 0;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(59, 59, 59);
+    color: white;
+  }
+  
+  .scores-super-container {
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .scores-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .score {
+    font-size: 40px;
+    padding: 20px;
+    margin-right: 180px;
+    margin-left: 180px;
+    margin-top: 40px;
+    width: 60%;
+    height: 500px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    
+  }
+  
+  .button-container{
+    display: inline-flex;
+    height: 10%;
+    width: 100%;
+    justify-content:center;
+  }
+  
+  .button{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 30px;
+    border: none;
+    background-color: rgb(76, 76, 76);
+  }
+  
+  
+  .number {
+    height:20%;
+    width:100%;
+    margin-top:90px;
+    margin-bottom: 160px;
+    font-size: 160px;
+    border-bottom: 0px;
+    font-weight: bold;
+  }
+  
+  
+  .names-input {
+    width: 90%;
+    height: 5vh;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
+    border: none;
+    font-size: x-large;
+    border-radius: 10px;
+    background-color:rgb(76, 76, 76) ;
+  }
+  
+  .clock-container {
+  
+    align-items:flex-end;
+    padding-top: 50px;
+  }
+  
+  .clock {
+   color: white;
+   font-size: xx-large;
+   font-weight: bold;
+  }
+  
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    background-color: rgb(36, 36, 36);
+    border-radius: 20px;
+  
+  }
+  
+  .popup-content .close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px; 
+    border: none;
+    background-color: rgb(36, 36, 36);
+    color: white;
+  }
+  
+  .rules-title {
+    color: #6FCF97;;
+  }
+  
+  .start-button{
+    height: 60px;
+    width: 130px;
+    border-radius: 10px;
+    background-color:#6FCF97;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+    margin-top: 20px;
+  }
+  
+  .stop-button{
+    height: 60px;
+    width: 130px;
+    border-radius: 10px;
+    background-color: #FF7870;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+    margin-top: 20px;
+  }
+  
+  .team-names {
+    font-size: xx-large;
+    margin:0;
+  }
+  
+  .winner{
+    font-size: x-large;
+    margin:0;
+    margin-bottom: 10px;
+  }
