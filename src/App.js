@@ -6,7 +6,6 @@ import Names from './Components/Names';
 import Clock from './Components/Clock';
 import PopUp from './Components/PopUp';
 import StartStopButton from './Components/StartStopButton';
-//Pebolas project
 
 function App() {
 
