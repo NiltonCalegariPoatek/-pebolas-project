@@ -1,4 +1,4 @@
-import './App.css';
+import './Dark-app.css';
 import logo from './images/logo.png'
 import React, { useState, useEffect } from 'react';
 import Score from './Components/Score';
@@ -6,6 +6,7 @@ import Names from './Components/Names';
 import Clock from './Components/Clock';
 import PopUp from './Components/PopUp';
 import StartStopButton from './Components/StartStopButton';
+import FinishPopUp from './Components/FinishPopUp';
 
 function App() {
 
@@ -143,6 +144,7 @@ function App() {
       </div>
 
       <StartStopButton setGameStart={setGameStart} gameStart={gameStart} />
+      <FinishPopUp trigger={false} setTrigger={() => {}}/>
 
       <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}/>
 
