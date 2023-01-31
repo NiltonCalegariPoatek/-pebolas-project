@@ -17,6 +17,7 @@ function App() {
   const [teamNameYellow, setTeamNameYellow] = useState()
 
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const [gameStart, setGameStart] = useState(false)
 
@@ -25,16 +26,16 @@ function App() {
   const [winner, setWinner] = useState()
 
 
-  useEffect(() => { handleGameStart({ gameStart }) }, [gameStart])
+  useEffect(() => { handleGameStart(gameStart) }, [gameStart])
+  
 
   useEffect(() => {
     if (winner === undefined) {
       handleWinGame(pointsGreen, pointsYellow)
     }
-  })
+  }, [pointsGreen, pointsYellow])
 
   function handleAddGoal(teamColor) {
-    //Verification > 10
     switch (teamColor.toLowerCase()) {
       case "green":
         setPointsGreen(pointsGreen + 1)
@@ -95,6 +96,17 @@ function App() {
     }
   }
 
+  function handleFinishGame(pointsGreen, pointsYellow) {
+    if (pointsGreen > pointsYellow) {
+      setWinner("green")
+      setIsVisible(true)
+    }
+    else if (pointsYellow > pointsGreen) {
+      setWinner("yellow")
+      setIsVisible(true)
+    }
+  }
+
   function handleWinGame(pointsGreen, pointsYellow) {
     if (pointsGreen >= pointsYellow + 2 && pointsGreen >= 10) {
       setWinner("green")
@@ -144,7 +156,7 @@ function App() {
       </div>
 
       <StartStopButton setGameStart={setGameStart} gameStart={gameStart} />
-      <FinishPopUp trigger={false} setTrigger={() => {}}/>
+      <FinishPopUp isVisible={isVisible}/>
 
       <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}/>
 

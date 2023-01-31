@@ -96,9 +96,14 @@ body{
     border: none;
     font-size: x-large;
     border-radius: 10px;
-    background-color:rgb(76, 76, 76) ;
+    background-color:rgb(76, 76, 76);
+    color: white;
   }
   
+::placeholder{
+    color: white;
+}
+
   .clock-container {
   
     align-items:flex-end;
@@ -177,4 +182,12 @@ body{
     font-size: x-large;
     margin:0;
     margin-bottom: 10px;
+  }
+
+  .modal-buttons {
+    border-radius: 7px;
+    border: none;
+    font-size:20px;
+    background-color:  rgb(76, 76, 76);
+    color: white;
   }

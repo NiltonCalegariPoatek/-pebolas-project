@@ -166,3 +166,9 @@
   margin:0;
   margin-bottom: 10px;
 }
+
+.modal-buttons {
+  border-radius: 7px;
+  border: none;
+  font-size:20px;
+}
