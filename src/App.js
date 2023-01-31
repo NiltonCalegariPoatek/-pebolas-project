@@ -25,9 +25,10 @@ function App() {
 
   const [winner, setWinner] = useState()
 
+  const [isResetClock, setIsResetClock] = useState(false)
 
-  useEffect(() => { handleGameStart(gameStart) }, [gameStart])
-  
+
+  useEffect(() => { handleGameStart() }, [gameStart])
 
   useEffect(() => {
     if (winner === undefined) {
@@ -87,13 +88,15 @@ function App() {
     }
   }
 
-  function handleGameStart({ gameStart }) {
+  function handleGameStart() {
+    console.log(gameStart)
     if (gameStart) {
       setRunning(true)
     }
-    else {
+    else if (gameStart === false) {
       setRunning(false)
     }
+    else{console.log("oi eu")}
   }
 
   function handleFinishGame() {
@@ -122,6 +125,25 @@ function App() {
     }
   }
 
+  function handlePlayAgain() {
+    setPointsGreen(0)
+    setPointsYellow(0)
+    setIsVisible(false)
+    setWinner(undefined)
+    setIsResetClock(true)
+  }
+
+  function handleChangeTeams() {
+    setPointsGreen(0)
+    setPointsYellow(0)
+    setIsVisible(false)
+    setTeamNameGreen(undefined)
+    setTeamNameYellow(undefined)
+    setGameStart(false)
+    setWinner(undefined)
+    setIsResetClock(true)
+  }
+
   return (
     <div className='App'>
       <header className='App-header'>
@@ -132,7 +154,7 @@ function App() {
         </fieldset>
 
       </header>
-      <Clock running={running} winner={winner} />
+      <Clock running={running} winner={winner} isResetClock={isResetClock} isResetFunc={() => {setIsResetClock(false)}}/>
 
 
       <div className='scores-super-container'>
@@ -146,7 +168,7 @@ function App() {
             gameStart={gameStart}
           />
         </div>
-        
+
         <div className='scores-container'>
           <Names teamName={teamNameYellow} teamColor={"yellow"} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart} />
           <Score
@@ -159,10 +181,10 @@ function App() {
         </div>
       </div>
 
-      <StartStopButton setGameStart={setGameStart} gameStart={gameStart} handleFinishGame={handleFinishGame}/>
-      <FinishPopUp isVisible={isVisible}/>
+      <StartStopButton setGameStart={setGameStart} gameStart={gameStart} handleFinishGame={handleFinishGame} />
+      <FinishPopUp isVisible={isVisible} handlePlayAgain={handlePlayAgain} handleChangeTeams={handleChangeTeams} />
 
-      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}/>
+      <PopUp trigger={buttonPopup} setTrigger={setButtonPopup} />
 
     </div>
   );

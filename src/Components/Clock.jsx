@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const Clock = ({ running, winner }) => {
+const Clock = ({ running, winner, resetClock, isResetFunc }) => {
+
+
     const [time, setTime] = useState(0);
+
     useEffect(() => {
         let interval;
         if (running) {
@@ -13,6 +16,14 @@ const Clock = ({ running, winner }) => {
         }
         return () => clearInterval(interval);
     }, [running]);
+
+    useEffect(()=> {
+        if (resetClock){
+            setTime(0)
+            isResetFunc()
+        }
+    }, [resetClock] )
+
     return (
         <div className='clock-container'>
             <p className='winner'>{winner ? `${winner} is the winner` : ""}</p>

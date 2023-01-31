@@ -5,7 +5,7 @@ const Names = ({ teamColor, teamName, handleTeamNameChange, gameStart }) => {
 
     ) :
         <form className='names'>
-            <input className='names-input' type={"text"} Placeholder="Team Name: 🖉" value={teamName} onChange={(e) => handleTeamNameChange(teamColor, e.target.value)} />
+            <input className='names-input' type={"text"} placeholder="Team Name: 🖉" value={teamName} onChange={(e) => handleTeamNameChange(teamColor, e.target.value)} />
         </form>
     )
 }
