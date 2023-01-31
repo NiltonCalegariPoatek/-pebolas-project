@@ -33,7 +33,7 @@ function App() {
     if (winner === undefined) {
       handleWinGame(pointsGreen, pointsYellow)
     }
-  }, [pointsGreen, pointsYellow])
+  }, [pointsGreen, pointsYellow, winner])
 
   function handleAddGoal(teamColor) {
     switch (teamColor.toLowerCase()) {
@@ -96,13 +96,17 @@ function App() {
     }
   }
 
-  function handleFinishGame(pointsGreen, pointsYellow) {
+  function handleFinishGame() {
     if (pointsGreen > pointsYellow) {
       setWinner("green")
       setIsVisible(true)
     }
     else if (pointsYellow > pointsGreen) {
       setWinner("yellow")
+      setIsVisible(true)
+    }
+    else {
+      setWinner("draw")
       setIsVisible(true)
     }
   }
@@ -155,7 +159,7 @@ function App() {
         </div>
       </div>
 
-      <StartStopButton setGameStart={setGameStart} gameStart={gameStart} />
+      <StartStopButton setGameStart={setGameStart} gameStart={gameStart} handleFinishGame={handleFinishGame}/>
       <FinishPopUp isVisible={isVisible}/>
 
       <PopUp trigger={buttonPopup} setTrigger={setButtonPopup}/>
