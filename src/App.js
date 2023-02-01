@@ -103,14 +103,17 @@ function App() {
     if (pointsGreen > pointsYellow) {
       setWinner("green")
       setIsVisible(true)
+      setRunning(false)
     }
     else if (pointsYellow > pointsGreen) {
       setWinner("yellow")
       setIsVisible(true)
+      setRunning(false)
     }
     else {
       setWinner("draw")
       setIsVisible(true)
+      setRunning(false)
     }
   }
 
@@ -131,6 +134,7 @@ function App() {
     setIsVisible(false)
     setWinner(undefined)
     setIsResetClock(true)
+    setRunning(true)
   }
 
   function handleChangeTeams() {

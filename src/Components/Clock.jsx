@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Clock = ({ running, winner, resetClock, isResetFunc }) => {
+const Clock = ({ running, winner, isResetClock, isResetFunc }) => {
 
 
     const [time, setTime] = useState(0);
@@ -18,11 +18,11 @@ const Clock = ({ running, winner, resetClock, isResetFunc }) => {
     }, [running]);
 
     useEffect(()=> {
-        if (resetClock){
+        if (isResetClock){
             setTime(0)
             isResetFunc()
         }
-    }, [resetClock] )
+    }, [isResetClock] )
 
     return (
         <div className='clock-container'>
