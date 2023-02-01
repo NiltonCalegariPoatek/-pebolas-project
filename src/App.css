@@ -88,6 +88,15 @@
   border: none;
   font-size: x-large;
   border-radius: 10px;
+  margin-top: 10px;
+}
+.addname {
+  margin-top:25px;
+  border: none;
+  background-color: white;
+  color:rgb(83, 94, 155);
+  font-size:x-large;
+  font-weight: bold;
 }
 
 .clock-container {

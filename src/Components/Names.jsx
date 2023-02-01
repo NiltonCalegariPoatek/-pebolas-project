@@ -1,12 +1,32 @@
-const Names = ({ teamColor, teamName, handleTeamNameChange, gameStart }) => {
-    return ((gameStart === true) ? (
+import AdditionalNameInput from "./AdditionalNameInput";
+import NameInput from "./NameInput";
 
-        <p className='team-names'>{teamName ? teamName : teamColor}</p>
+const Names = ({ teamColor, teamName, additionalTeamName, handleTeamNameChange, handleAdditionalNameChange, gameStart }) => {
 
-    ) :
-        <form className='names'>
-            <input className='names-input' type={"text"} placeholder="Team Name: 🖉" value={teamName} onChange={(e) => handleTeamNameChange(teamColor, e.target.value)} />
-        </form>
+    function buildTeamNames(teamName, teamColor, additionalTeamName) {
+        if (teamName && additionalTeamName) {
+            return `${teamName} & ${additionalTeamName}`
+        }
+        else if (teamName) {
+            return teamName
+        }
+        else if (additionalTeamName) {
+            return additionalTeamName
+        }
+        else {
+            return teamColor
+        }
+    }
+
+    return (
+        gameStart ?
+            <p className='team-names'>{buildTeamNames(teamName, teamColor, additionalTeamName)}</p>
+            :
+            <>
+                <NameInput teamColor={teamColor} teamName={teamName} handleTeamNameChange={handleTeamNameChange} />
+
+                <AdditionalNameInput teamColor={teamColor} teamName={additionalTeamName} handleTeamNameChange={handleAdditionalNameChange} />
+            </>
     )
 }
 

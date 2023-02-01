@@ -16,6 +16,9 @@ function App() {
   const [teamNameGreen, setTeamNameGreen] = useState()
   const [teamNameYellow, setTeamNameYellow] = useState()
 
+  const [additionalTeamNameGreen, setAdditionalTeamNameGreen] = useState()
+  const [additionalTeamNameYellow, setAdditionalTeamNameYellow] = useState()
+
   const [buttonPopup, setButtonPopup] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -88,15 +91,28 @@ function App() {
     }
   }
 
+  function handleAdditionalNameChange(teamColor, newAdditionalName) {
+    switch (teamColor.toLowerCase()) {
+      case "green":
+        setAdditionalTeamNameGreen(newAdditionalName)
+        break;
+      case "yellow":
+        setAdditionalTeamNameYellow(newAdditionalName)
+        break;
+
+      default:
+        break;
+    }
+  }
+
   function handleGameStart() {
-    console.log(gameStart)
     if (gameStart) {
       setRunning(true)
     }
     else if (gameStart === false) {
       setRunning(false)
     }
-    else{console.log("oi eu")}
+    else { console.log("oi eu") }
   }
 
   function handleFinishGame() {
@@ -146,6 +162,8 @@ function App() {
     setGameStart(false)
     setWinner(undefined)
     setIsResetClock(true)
+    setAdditionalTeamNameGreen(undefined)
+    setAdditionalTeamNameYellow(undefined)
   }
 
   return (
@@ -158,12 +176,20 @@ function App() {
         </fieldset>
 
       </header>
-      <Clock running={running} winner={winner} isResetClock={isResetClock} isResetFunc={() => {setIsResetClock(false)}}/>
+      <Clock running={running} winner={winner} isResetClock={isResetClock} isResetFunc={() => { setIsResetClock(false) }} />
 
 
       <div className='scores-super-container'>
         <div className='scores-container'>
-          <Names teamName={teamNameGreen} teamColor={"green"} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart} />
+          <Names
+            teamColor={"green"}
+            teamName={teamNameGreen}
+            additionalTeamName={additionalTeamNameGreen}
+            handleTeamNameChange={handleTeamNameChange}
+            handleAdditionalNameChange={handleAdditionalNameChange}
+            gameStart={gameStart}
+          />
+
           <Score
             points={pointsGreen}
             addPoint={() => handleAddGoal("green")}
@@ -174,7 +200,15 @@ function App() {
         </div>
 
         <div className='scores-container'>
-          <Names teamName={teamNameYellow} teamColor={"yellow"} handleTeamNameChange={handleTeamNameChange} gameStart={gameStart} />
+          <Names
+            teamColor={"yellow"}
+            teamName={teamNameYellow}
+            additionalTeamName={additionalTeamNameYellow}
+            handleTeamNameChange={handleTeamNameChange}
+            handleAdditionalNameChange={handleAdditionalNameChange}
+            gameStart={gameStart}
+          />
+
           <Score
             points={pointsYellow}
             addPoint={() => handleAddGoal("yellow")}

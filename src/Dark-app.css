@@ -98,10 +98,20 @@ body {
     border-radius: 10px;
     background-color: rgb(76, 76, 76);
     color: white;
+    margin-top: 10px;
 }
 
 ::placeholder {
     color: white;
+}
+
+.addname {
+    margin-top:25px;
+    border: none;
+    background-color: rgb(36, 36, 36);
+    color:rgb(83, 94, 155);
+    font-size:x-large;
+    font-weight: bold;
 }
 
 .clock-container {
