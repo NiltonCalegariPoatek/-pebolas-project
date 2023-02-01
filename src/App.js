@@ -112,7 +112,9 @@ function App() {
     else if (gameStart === false) {
       setRunning(false)
     }
-    else { console.log("oi eu") }
+    else {
+      console.log("oi eu")
+    }
   }
 
   function handleFinishGame() {
