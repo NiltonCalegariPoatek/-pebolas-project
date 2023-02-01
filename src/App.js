@@ -99,7 +99,6 @@ function App() {
       case "yellow":
         setAdditionalTeamNameYellow(newAdditionalName)
         break;
-
       default:
         break;
     }
