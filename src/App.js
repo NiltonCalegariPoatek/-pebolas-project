@@ -7,6 +7,7 @@ import Clock from './Components/Clock';
 import PopUp from './Components/PopUp';
 import StartStopButton from './Components/StartStopButton';
 import FinishPopUp from './Components/FinishPopUp';
+import ToggleDarkMode from './Components/ToggleDarkMode';
 
 function App() {
 
@@ -174,11 +175,12 @@ function App() {
         <fieldset className='logo'>
           <img src={logo} alt='logo'></img>
           <button className='rules' onClick={() => setButtonPopup(true)}>Rules</button>
+          <ToggleDarkMode/>
         </fieldset>
 
       </header>
       <Clock running={running} winner={winner} isResetClock={isResetClock} isResetFunc={() => { setIsResetClock(false) }} />
-
+      
 
       <div className='scores-super-container'>
         <div className='scores-container'>
@@ -189,6 +191,7 @@ function App() {
             handleTeamNameChange={handleTeamNameChange}
             handleAdditionalNameChange={handleAdditionalNameChange}
             gameStart={gameStart}
+            winner={winner}
           />
 
           <Score
@@ -208,6 +211,7 @@ function App() {
             handleTeamNameChange={handleTeamNameChange}
             handleAdditionalNameChange={handleAdditionalNameChange}
             gameStart={gameStart}
+            winner={winner}
           />
 
           <Score
