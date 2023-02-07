@@ -191,6 +191,7 @@ body {
 .team-names {
     font-size: xx-large;
     margin: 0;
+    width:100%;
 }
 
 .winner {
@@ -287,6 +288,13 @@ input:checked+.slider:before {
 }
 
 .winner-crown {
-    height: 10vh;
-    width: 5vw;
+    height: 90%;
+    width: 50%;
+}
+
+.name-crown-container {
+    display: flex;
+    align-items: center;
+    height:10vh;
+    width:10vw;
 }

@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     if (winner === undefined) {
-      handleWinGame(pointsGreen, pointsYellow)
+      handleWinGame(pointsGreen, pointsYellow, setRunning)
     }
   }, [pointsGreen, pointsYellow, winner])
 
@@ -135,14 +135,16 @@ function App() {
     }
   }
 
-  function handleWinGame(pointsGreen, pointsYellow) {
+  function handleWinGame(pointsGreen, pointsYellow, setRunning) {
     if (pointsGreen >= pointsYellow + 2 && pointsGreen >= 10) {
       setWinner("green")
       console.log("Verde ganhou")
+      setRunning(false)
     }
     else if (pointsYellow >= pointsGreen + 2 && pointsYellow >= 10) {
       setWinner("yellow")
       console.log("Amarelo ganhou")
+      setRunning(false)
     }
   }
 

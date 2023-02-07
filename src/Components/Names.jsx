@@ -21,10 +21,10 @@ const Names = ({ teamColor, teamName, additionalTeamName, handleTeamNameChange, 
 
     return (
         gameStart ?
-            <>
+            <div className='name-crown-container'>
                 {winner === teamColor && <img  className='winner-crown'src={CrownRight} alt="Crown turning right" />}
                 <p className='team-names'>{buildTeamNames(teamName, teamColor, additionalTeamName)}</p>
-            </>
+            </div>
             :
             <>
                 <NameInput teamColor={teamColor} teamName={teamName} handleTeamNameChange={handleTeamNameChange} />
