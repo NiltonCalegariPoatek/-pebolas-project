@@ -6,9 +6,9 @@ const AdditionalNameInput = ({ teamColor, teamName, handleTeamNameChange }) => {
         <>
             {addedName ?
                 <form className='names'>
-                    <input className='names-input' type={"text"} placeholder="Team Name: 🖉"
+                    <input className='names-input' type={"text"} placeholder="Team Name: ✎"
                         value={teamName} onChange={(e) => handleTeamNameChange(teamColor, e.target.value)} 
-                        maxLength='17'/>
+                        maxLength='10'/>
                 </form>
                 :
                 <button className="addname" onClick={() =>setAddedName(true)}>+Add name</button>

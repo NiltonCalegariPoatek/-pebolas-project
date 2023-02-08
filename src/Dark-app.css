@@ -48,14 +48,14 @@ body {
 }
 
 .score {
-    
+
     font-size: 40px;
     padding: 20px;
-    margin-right: 260px;
-    margin-left: 260px;
-    margin-top: 40px;
+    margin-right: 140px;
+    margin-left: 140px;
+    margin-top: 10px;
     width: 50%;
-    height: 500px;
+    height: 360px;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 
@@ -77,13 +77,17 @@ body {
     font-size: 30px;
     border: none;
     background-color: rgb(82, 82, 82);
+    color: black;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 700;
 }
 
 
 .number {
     height: 20%;
     width: 100%;
-    margin-top: 90px;
+    margin-top: 30px;
     margin-bottom: 160px;
     font-size: 160px;
     border-bottom: 0px;
@@ -92,15 +96,15 @@ body {
 
 
 .names-input {
-    width: 90%;
-    height: 5vh;
+    width: 70%;
+    height: 4vh;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0);
     border: none;
     font-size: x-large;
     border-radius: 10px;
     background-color: rgb(76, 76, 76);
     color: white;
-    margin-top: 10px;
+    margin: 1px;
 }
 
 ::placeholder {
@@ -108,7 +112,7 @@ body {
 }
 
 .addname {
-    margin-top: 25px;
+    margin-top: 5px;
     border: none;
     background-color: rgb(36, 36, 36);
     color: rgb(43, 139, 197);
@@ -117,11 +121,8 @@ body {
 }
 
 .clock-container {
-
     align-items: flex-end;
-    padding-top: 50px;
-    
-    
+    padding-top: 10px;
 }
 
 .clock {
@@ -166,6 +167,10 @@ body {
     color: #6FCF97;
 }
 
+.rules-list {
+    text-align: left;
+  }
+
 .start-button {
     height: 60px;
     width: 130px;
@@ -174,7 +179,8 @@ body {
     border: none;
     font-weight: bold;
     font-size: large;
-    margin-top: 20px;
+    margin-top: 10px;
+    color: black;
 }
 
 .stop-button {
@@ -185,13 +191,14 @@ body {
     border: none;
     font-weight: bold;
     font-size: large;
-    margin-top: 20px;
+    margin-top: 10px;
+    color:black;
 }
 
 .team-names {
     font-size: xx-large;
     margin: 0;
-    width:100%;
+    width: 100%;
 }
 
 .winner {
@@ -295,6 +302,6 @@ input:checked+.slider:before {
 .name-crown-container {
     display: flex;
     align-items: center;
-    height:10vh;
-    width:10vw;
+    height: 10vh;
+    width: 10vw;
 }

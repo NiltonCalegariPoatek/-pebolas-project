@@ -4,7 +4,7 @@ function PopUp(props) {
             <div className='popup-content'>
                 <button className='close-button' onClick={() => props.setTrigger(false)}>x</button>
                 <h3 className='rules-title'>Rules</h3>
-                <ul>
+                <ul className='rules-list'>
                     <li>The team that scores 10 points with a difference of 2 points wins. In the case of a 9-9 score, the game ends when one of the teams opens up a 2-point lead.</li>
                     <p/>
                     <li>The match starts with the ball being launched by one of the sides of the table in the middle of the field. Throughout the game, the team that suffered the goal starts relaunching the ball.</li>
