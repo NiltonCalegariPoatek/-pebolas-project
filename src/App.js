@@ -213,6 +213,7 @@ function App() {
             handleAdditionalNameChange={handleAdditionalNameChange}
             gameStart={gameStart}
             winner={winner}
+            isDarkTheme={isDarkTheme}
           />
 
           <Score
@@ -233,6 +234,7 @@ function App() {
             handleAdditionalNameChange={handleAdditionalNameChange}
             gameStart={gameStart}
             winner={winner}
+            isDarkTheme={isDarkTheme}
           />
 
           <Score

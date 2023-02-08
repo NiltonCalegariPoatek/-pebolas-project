@@ -2,7 +2,7 @@ import AdditionalNameInput from "./AdditionalNameInput";
 import NameInput from "./NameInput";
 import CrownRight from "../images/Crown-right.gif"
 
-const Names = ({ teamColor, teamName, additionalTeamName, handleTeamNameChange, handleAdditionalNameChange, gameStart, winner }) => {
+const Names = ({ teamColor, teamName, additionalTeamName, handleTeamNameChange, handleAdditionalNameChange, gameStart, winner, isDarkTheme }) => {
 
     function buildTeamNames(teamName, teamColor, additionalTeamName) {
         if (teamName && additionalTeamName) {
@@ -30,7 +30,7 @@ const Names = ({ teamColor, teamName, additionalTeamName, handleTeamNameChange, 
                 <NameInput teamColor={teamColor} teamName={teamName} handleTeamNameChange={handleTeamNameChange} />
 
 
-                <AdditionalNameInput teamColor={teamColor} teamName={additionalTeamName} handleTeamNameChange={handleAdditionalNameChange} />
+                <AdditionalNameInput teamColor={teamColor} teamName={additionalTeamName} handleTeamNameChange={handleAdditionalNameChange} isDarkTheme={isDarkTheme}/>
 
             </>
     )
