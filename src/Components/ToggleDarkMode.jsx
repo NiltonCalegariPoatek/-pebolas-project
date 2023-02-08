@@ -1,9 +1,9 @@
-const ToggleDarkMode = () => {
+const ToggleDarkMode = ({isDarkTheme, setIsDarkTheme}) => {
     return (
         <>
-            <label class="switch">
-                <input type="checkbox"/>
-                <span class="slider round"></span>
+            <label className="switch">
+                <input type="checkbox" value={isDarkTheme} onChange={(e) => setIsDarkTheme(!isDarkTheme)}/>
+                <span className="slider round"></span>
             </label>
         </>
     )

@@ -1,3 +1,4 @@
+import './App.css';
 import './Dark-app.css';
 import logo from './images/logo.png'
 import React, { useState, useEffect } from 'react';
@@ -31,6 +32,7 @@ function App() {
 
   const [isResetClock, setIsResetClock] = useState(false)
 
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   useEffect(() => { handleGameStart() }, [gameStart])
 
@@ -39,6 +41,23 @@ function App() {
       handleWinGame(pointsGreen, pointsYellow, setRunning)
     }
   }, [pointsGreen, pointsYellow, winner])
+
+  useEffect(() => {
+    console.log(" i am running")
+    const allElements = document.getElementsByTagName("*");
+
+    for (const elements of allElements) {
+      if (isDarkTheme) {
+        if (!elements.classList.contains('Dark')) {
+          elements.classList.add('Dark');
+        }
+      } else {
+        if (elements.classList.contains(`Dark`)) {
+          elements.classList.remove(`Dark`)
+        }
+      }
+    }
+  })
 
   function handleAddGoal(teamColor) {
     switch (teamColor.toLowerCase()) {
@@ -177,12 +196,12 @@ function App() {
         <fieldset className='logo'>
           <img src={logo} alt='logo'></img>
           <button className='rules' onClick={() => setButtonPopup(true)}>Rules</button>
-          <ToggleDarkMode/>
+          <ToggleDarkMode isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
         </fieldset>
 
       </header>
       <Clock running={running} winner={winner} isResetClock={isResetClock} isResetFunc={() => { setIsResetClock(false) }} />
-      
+
 
       <div className='scores-super-container'>
         <div className='scores-container'>
