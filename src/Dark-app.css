@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Montserrat;
+    src: url('font/Montserrat-VariableFont_wght.ttf');
+}
+
 body.Dark {
     background-color: rgb(36, 36, 36);
 
@@ -34,6 +39,7 @@ body.Dark {
     border: none;
     background-color: rgb(59, 59, 59);
     color: white;
+    font-family: montserrat;
 }
 
 .scores-super-container.Dark {
@@ -92,6 +98,7 @@ body.Dark {
     font-size: 160px;
     border-bottom: 0px;
     font-weight: bold;
+    font-family: montserrat;
 }
 
 
@@ -169,7 +176,7 @@ body.Dark {
 
 .rules-list.Dark {
     text-align: left;
-  }
+}
 
 .start-button.Dark {
     height: 60px;
@@ -192,20 +199,16 @@ body.Dark {
     font-weight: bold;
     font-size: large;
     margin-top: 10px;
-    color:black;
+    color: black;
 }
 
 .team-names.Dark {
     font-size: xx-large;
     margin: 0;
     width: 100%;
+    font-family: montserrat;
 }
 
-.winner.Dark {
-    font-size: x-large;
-    margin: 0;
-    margin-bottom: 10px;
-}
 
 
 .modal-popup-content.Dark {

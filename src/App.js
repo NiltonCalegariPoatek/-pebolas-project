@@ -1,6 +1,7 @@
 import './App.css';
 import './Dark-app.css';
 import logo from './images/logo.png'
+import darklogo from './images/darklogo.png'
 import React, { useState, useEffect } from 'react';
 import Score from './Components/Score';
 import Names from './Components/Names';
@@ -194,7 +195,7 @@ function App() {
       <header className='App-header'>
 
         <fieldset className='logo'>
-          <img src={logo} alt='logo'></img>
+          <img src={isDarkTheme ? darklogo : logo} alt={isDarkTheme ? 'darklogo' : 'logo'}></img>
           <button className='rules' onClick={() => setButtonPopup(true)}>Rules</button>
           <ToggleDarkMode isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
         </fieldset>
