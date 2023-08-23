@@ -1,5 +1,7 @@
+import './App.css';
 import './Dark-app.css';
 import logo from './images/logo.png'
+import darklogo from './images/darklogo.png'
 import React, { useState, useEffect } from 'react';
 import Score from './Components/Score';
 import Names from './Components/Names';
@@ -7,6 +9,7 @@ import Clock from './Components/Clock';
 import PopUp from './Components/PopUp';
 import StartStopButton from './Components/StartStopButton';
 import FinishPopUp from './Components/FinishPopUp';
+import ToggleDarkMode from './Components/ToggleDarkMode';
 
 function App() {
 
@@ -30,14 +33,32 @@ function App() {
 
   const [isResetClock, setIsResetClock] = useState(false)
 
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   useEffect(() => { handleGameStart() }, [gameStart])
 
   useEffect(() => {
     if (winner === undefined) {
-      handleWinGame(pointsGreen, pointsYellow)
+      handleWinGame(pointsGreen, pointsYellow, setRunning)
     }
   }, [pointsGreen, pointsYellow, winner])
+
+  useEffect(() => {
+    console.log(" i am running")
+    const allElements = document.getElementsByTagName("*");
+
+    for (const elements of allElements) {
+      if (isDarkTheme) {
+        if (!elements.classList.contains('Dark')) {
+          elements.classList.add('Dark');
+        }
+      } else {
+        if (elements.classList.contains(`Dark`)) {
+          elements.classList.remove(`Dark`)
+        }
+      }
+    }
+  })
 
   function handleAddGoal(teamColor) {
     switch (teamColor.toLowerCase()) {
@@ -134,14 +155,16 @@ function App() {
     }
   }
 
-  function handleWinGame(pointsGreen, pointsYellow) {
+  function handleWinGame(pointsGreen, pointsYellow, setRunning) {
     if (pointsGreen >= pointsYellow + 2 && pointsGreen >= 10) {
       setWinner("green")
       console.log("Verde ganhou")
+      setRunning(false)
     }
     else if (pointsYellow >= pointsGreen + 2 && pointsYellow >= 10) {
       setWinner("yellow")
       console.log("Amarelo ganhou")
+      setRunning(false)
     }
   }
 
@@ -172,8 +195,9 @@ function App() {
       <header className='App-header'>
 
         <fieldset className='logo'>
-          <img src={logo} alt='logo'></img>
+          <img src={isDarkTheme ? darklogo : logo} alt={isDarkTheme ? 'darklogo' : 'logo'}></img>
           <button className='rules' onClick={() => setButtonPopup(true)}>Rules</button>
+          <ToggleDarkMode isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
         </fieldset>
 
       </header>
@@ -189,6 +213,8 @@ function App() {
             handleTeamNameChange={handleTeamNameChange}
             handleAdditionalNameChange={handleAdditionalNameChange}
             gameStart={gameStart}
+            winner={winner}
+            isDarkTheme={isDarkTheme}
           />
 
           <Score
@@ -208,6 +234,8 @@ function App() {
             handleTeamNameChange={handleTeamNameChange}
             handleAdditionalNameChange={handleAdditionalNameChange}
             gameStart={gameStart}
+            winner={winner}
+            isDarkTheme={isDarkTheme}
           />
 
           <Score
